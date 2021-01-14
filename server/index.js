@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express'),
       session = require('express-session'),
       massive = require('massive'),
+      authCtrl = require('./controllers/authController'),
       {CONNECTION_STRING, SESSION_SECRET} = process.env,
       app = express();
 
@@ -19,6 +20,9 @@ massive({
     app.set('db', db);
     console.log('db connected');
 })
+
+//Auth endpoints
+app.post('/auth/register', authCtrl.register);
 
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
