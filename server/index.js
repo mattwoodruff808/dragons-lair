@@ -31,6 +31,7 @@ app.get('/auth/logout', authCtrl.logout);
 //Other endpoints
 app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure);
 app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure);
+app.post('/api/treasure/user', auth.usersOnly, treasureCtrl.addUserTreasure);
 
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
