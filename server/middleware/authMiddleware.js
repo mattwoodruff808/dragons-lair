@@ -7,5 +7,14 @@ module.exports = {
         }
 
         next();
+    },
+    adminsOnly: (req, res, next) => {
+        const {isAdmin} = req.session.user;
+
+        if (!isAdmin){
+            return res.status(403).send('You are not an admin');
+        }
+
+        next();
     }
 }
