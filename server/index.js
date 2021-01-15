@@ -4,6 +4,7 @@ const express = require('express'),
       massive = require('massive'),
       authCtrl = require('./controllers/authController'),
       treasureCtrl = require('./controllers/treasureController'),
+      auth = require('./middleware/authMiddleware'),
       {CONNECTION_STRING, SESSION_SECRET} = process.env,
       app = express();
 
@@ -29,7 +30,7 @@ app.get('/auth/logout', authCtrl.logout);
 
 //Other endpoints
 app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure);
-
+app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure);
 
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
